@@ -1,0 +1,80 @@
+syntax = "proto3";
+package knightscrusade;
+
+option java_package = "com.knightscrusade.common.proto";
+option java_outer_classname = "Packets";
+option java_multiple_files = false;
+
+// === Handshake ===
+
+message LoginRequest {
+    string player_name = 1;
+}
+
+message LoginResponse {
+    string player_id = 1;
+    double spawn_x = 2;
+    double spawn_y = 3;
+    double spawn_z = 4;
+}
+
+// === Player Input ===
+
+message MovePacket {
+    string player_id = 1;
+    double x = 2;
+    double y = 3;
+    double z = 4;
+    float yaw = 5;
+    float pitch = 6;
+    int64 sequence = 7;
+    bool on_ground = 8;
+    bool forward = 9;
+    bool backward = 10;
+    bool left = 11;
+    bool right = 12;
+    bool jump = 13;
+    bool sprint = 14;
+    bool l_leap = 15;
+}
+
+// === World State ===
+
+message ChunkDataPacket {
+    int32 chunk_x = 1;
+    int32 chunk_z = 2;
+    bytes block_data = 3;
+}
+
+message BlockChangePacket {
+    int32 x = 1;
+    int32 y = 2;
+    int32 z = 3;
+    int32 block_id = 4;
+}
+
+// === Entity State ===
+
+message EntitySpawnPacket {
+    string entity_id = 1;
+    string entity_type = 2;
+    double x = 3;
+    double y = 4;
+    double z = 5;
+    float yaw = 6;
+    float pitch = 7;
+}
+
+message EntityMovePacket {
+    string entity_id = 1;
+    double x = 2;
+    double y = 3;
+    double z = 4;
+    float yaw = 5;
+    float pitch = 6;
+    bool on_ground = 7;
+}
+
+message EntityRemovePacket {
+    string entity_id = 1;
+}
